@@ -1,0 +1,16 @@
+@import '../../../styles/global';
+
+.c-page-boundary {
+    max-width: $s-screen-boundary;
+    margin: 0 auto;
+
+    &.is-full {
+        position: relative;
+        height: 100%;
+    }
+
+    &.is-small {
+        max-width: $s-screen-boundary / 2;
+    }
+}
+ 

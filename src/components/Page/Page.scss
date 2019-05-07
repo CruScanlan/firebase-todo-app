@@ -1,0 +1,31 @@
+@import './styles/global.scss';
+
+.c-page {
+    min-height: 80vh;
+
+    &.has-background {
+        position: relative;
+    }
+    
+    &__boundary {
+        max-width: $s-screen-boundary;
+        margin: 0 auto;
+
+        &.is-full {
+            position: relative;
+            height: 100%;
+        }
+
+        &.is-small {
+            max-width: $s-screen-boundary / 2;
+        }
+    }
+
+    &__background {
+        position: fixed;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover
+    }
+}
