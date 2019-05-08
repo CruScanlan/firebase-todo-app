@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
+
+import NavBar from './components/NavBar/NavBar';
 
 import MainPage from './pages/Main/MainPage';
 
@@ -10,13 +12,12 @@ function App() {
     <Router>
         <div className="c-app">
             <header>
-                Header
+                <NavBar />
             </header>
             <main>
                 <MainPage />
             </main>
             <footer>
-                Footer
             </footer>
         </div>
     </Router>
