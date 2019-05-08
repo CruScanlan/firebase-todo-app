@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 import NavBar from './components/NavBar/NavBar';
 
-import MainPage from './pages/Main/MainPage';
+import ListsPage from './pages/Lists/ListsPage';
 
 import './App.scss';
 
@@ -15,7 +15,7 @@ function App() {
                 <NavBar />
             </header>
             <main>
-                <MainPage />
+                <ListsPage />
             </main>
             <footer>
             </footer>
