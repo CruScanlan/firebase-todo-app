@@ -20,7 +20,7 @@ class ListsSection extends React.Component {
     getRenderedLists() {
         if(this.props.listsIsLoading) {
             return (
-                <div className="c-listsSection__loader-container">
+                <div className="c-listsSection__loaderContainer">
                     <Loader />
                 </div>
             )
@@ -34,7 +34,7 @@ class ListsSection extends React.Component {
         }
         return this.props.lists.map(list => {
             return (
-                <Link className="c-listsSection__listItem" key={list.id} to={`/list/${list.id}`}>
+                <Link className="c-listsSection__listItem" key={list.id} to={{pathname: `/list/${list.id}`, state:{listName: list.name, listId: list.id}}}>
                     <div className="c-listsSection__listItem-name">
                         {list.name}
                     </div>

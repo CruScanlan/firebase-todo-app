@@ -1,74 +1,81 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {listsFetch} from '../../../../actions';
+import {listItemsFetch} from '../../../../actions';
 
 import Loader from '../../../../components/Loader/Loader';
+
+import tickSvg from '../../../../assets/icons/tick.svg';
+import tickedSvg from '../../../../assets/icons/ticked.svg';
 
 import './ListItemsSection.scss';
 
 class ListItemsSection extends React.Component {
     constructor(props) {
         super(props);
+
+        this.handleTickEvent = this.handleTickEvent.bind(this);
+    }
+
+    getList() {
+        if(!this.props.lists || this.props.lists.length === 0) return undefined;
+        return this.props.lists.find(list => list.id === this.props.listId);
     }
 
     componentDidMount() {
-        this.props.listsFetch();
+        this.props.listItemsFetch(this.props.listId);
     }
 
-    getRenderedLists() {
-        if(this.props.listsIsLoading) {
+    handleTickEvent(item) {
+        
+    }
+
+    renderListItems(list) {
+        if(list.itemsIsLoading) {
             return (
-                <div className="c-listsSection__loader-container">
+                <div className="c-listItemsSection__loaderContainer">
                     <Loader />
                 </div>
             )
         }
-        if(this.props.listsHasErrored) {
+        if(list.itemsHasErrored) {
             return (
                 <div>
-                    Error Loading Lists
+                    Error loading items
                 </div>
             )
         }
-        return this.props.lists.map(list => {
+        return list.items.map(item => {
             return (
-                <Link className="c-listsSection__listItem" key={list.id} to={`/list/${list.id}`}>
-                    <div className="c-listsSection__listItem-name">
-                        {list.name}
-                    </div>
-                    <img className="c-listsSection__listItem-chevron" src={rightChevronSvg}/>
-                </Link>
+                <div className="c-listItemsSection__item" key={item.id}>                        
+                    <h5>{item.name}</h5>
+                    {this.renderTick(item)}
+                </div>
             )
         })
     }
 
+    renderTick(item) {
+        if(item.completed) {
+            return (
+                <img className="c-listItemsSection__item-tick" src={tickSvg} onClick={() => this.handleTickEvent(item)} />
+            )
+        }
+        return <img className="c-listItemsSection__item-tick" src={tickedSvg} onClick={() => this.handleTickEvent(item)} />
+    }
+
     render() {
         return (
-            <section className="c-listsSection">
-                <div className="c-listsSection__list">
-                    <div className="c-listsSection__list-titleContainer">
-                        <h2>Lists</h2>
-                    </div>
-                    <div className="c-listsSection__list-container">
-                        {this.getRenderedLists()}
-                    </div>
-                </div>
+            <section className="c-listItemsSection">
+               {this.renderListItems(this.getList())}
             </section>
         )
     }
 }
 
-/*
-
-*/
-
 const mapStateToProps = state => {
     return {
-        lists: state.lists,
-        listsIsLoading: state.listsIsLoading,
-        listsHasErrored: state.listsHasErrored
+        lists: state.lists
     }
 }
 
-export default connect(mapStateToProps, {listsFetch})(ListItemsSection);
+export default connect(mapStateToProps, {listItemsFetch})(ListItemsSection);

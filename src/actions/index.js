@@ -1,4 +1,5 @@
 import {firestore} from '../firebase';
+import { list } from 'postcss';
 
 export const LISTS_FETCH = 'lists_fetch';
 export const LISTS_HAS_ERROED = 'lists_has_erroed';
@@ -36,11 +37,11 @@ export function listsFetch() {
                 lists.push({
                     id: doc.id,
                     items: [],
-                    itemsLoaded: false,
+                    itemsHasErrored: false,
+                    itemsIsLoading: false,
                     name: doc.data().name
                 })
             });
-            console.log(lists)
             dispatch(listsIsLoading(false));
             dispatch(listsFetchSuccess(lists));
         }).catch(error => {
@@ -55,19 +56,19 @@ export const LIST_ITEMS_HAS_ERROED = 'list_items_has_erroed';
 export const LIST_ITEMS_IS_LOADING = 'list_items_is_loading';
 export const LIST_ITEMS_FETCH_SUCCESS = 'list_items_fetch_success';
 
-export function listItemsHasErrored(listId, hasErrored) {
+export function listItemsHasErrored(listId, itemsHasErrored) {
     return {
         type: LIST_ITEMS_HAS_ERROED,
         listId,
-        hasErrored
+        itemsHasErrored
     }
 }
 
-export function listItemsIsLoading(listId, isLoading) {
+export function listItemsIsLoading(listId, itemsIsLoading) {
     return {
         type: LIST_ITEMS_IS_LOADING,
         listId,
-        isLoading
+        itemsIsLoading
     }
 }
 
@@ -83,17 +84,17 @@ export function listItemsFetch(listId) {
     return dispatch => {
         dispatch(listItemsIsLoading(listId, true));
 
-        firestore.collection('lists').document(listId).collection('items').get().then(snapshot => {
-            const items = [];
+        firestore.collection('lists').doc(listId).collection('items').get().then(snapshot => {
+            let items = [];
             snapshot.forEach(doc => {
                 items.push({
                     id: doc.id,
+                    completed: doc.data().completed,
                     name: doc.data().name
                 })
             });
-            console.log(items)
             dispatch(listItemsIsLoading(listId, false));
-            dispatch(listItemsFetchSuccess(items));
+            dispatch(listItemsFetchSuccess(listId, items));
         }).catch(error => {
             console.error(error);
             dispatch(listItemsHasErrored(listId, true));

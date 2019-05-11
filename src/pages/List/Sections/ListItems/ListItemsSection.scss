@@ -1,0 +1,29 @@
+.c-listItemsSection {
+    border-top: 2px solid white;
+    margin: 0px 10px;
+
+    &__loaderContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #fff;
+
+        &-tick {
+            height: 32px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        & > h5 {
+            margin: 0;
+        }
+    }
+}

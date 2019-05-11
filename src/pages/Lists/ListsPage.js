@@ -14,11 +14,11 @@ export default props => {
             title='Lists'
             background="linear-gradient(40deg,#45cafc,#303f9f)"
         >
-            <PageBoundary>
-                <div className="p-listsPage__inner">
+            <div className="p-listsPage__inner">
+                <PageBoundary>
                     <ListsSection />
-                </div>
-            </PageBoundary>
+                </PageBoundary>
+            </div>
         </Page>
     )
 }
