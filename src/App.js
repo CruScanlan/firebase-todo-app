@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Link } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
 
 import ListsPage from './pages/Lists/ListsPage';
+import ListPage from './pages/List/ListPage';
 
 import './App.scss';
 
@@ -15,7 +16,8 @@ function App() {
                 <NavBar />
             </header>
             <main>
-                <ListsPage />
+                <Route path="/list/:listId" component={ListPage} />
+                <Route exact path="/" component={ListsPage} />
             </main>
             <footer>
             </footer>

@@ -1,3 +1,7 @@
+@import '../../styles/global';
+
 .p-listsPage {
-    
+    &__inner {
+        padding: $s-gutter--xsmall;
+    }
 }

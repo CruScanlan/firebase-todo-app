@@ -4,11 +4,10 @@ import {Link} from 'react-router-dom';
 import {listsFetch} from '../../../../actions';
 
 import Loader from '../../../../components/Loader/Loader';
-import rightChevronSvg from '../../../../assets/icons/right-chevron.svg';
 
-import './ListsSection.scss';
+import './ListItemsSection.scss';
 
-class ListsSection extends React.Component {
+class ListItemsSection extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -72,4 +71,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {listsFetch})(ListsSection);
+export default connect(mapStateToProps, {listsFetch})(ListItemsSection);

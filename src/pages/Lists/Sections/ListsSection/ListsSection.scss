@@ -1,3 +1,48 @@
+@import '../../../../styles/global';
+
 .c-listsSection {
-    
+    &__list {
+
+        &-titleContainer {
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0px 10px;
+            border-bottom: 2px solid #fff;
+        }
+
+        &-container {
+        }
+    }
+
+    &__loader-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__listItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 15px 0px 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+
+        &, &:hover {
+            color: $s-color--white;
+            text-decoration: none;
+        }
+
+        &-name {
+            font-size: 1.3em;
+            padding-left: 2px;
+        }
+
+        &-chevron {
+            height: 36px;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }

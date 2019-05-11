@@ -7,13 +7,13 @@ import './ListPage.scss';
 export default props => {
     return (
         <Page
-            style="list-page"
-            className="p-list-page"
+            style="listPage"
+            className="p-listPage"
             title={0}
             background="linear-gradient(40deg,#45cafc,#303f9f)"
         >
             <PageBoundary>
-                
+                Wow
             </PageBoundary>
         </Page>
     )
