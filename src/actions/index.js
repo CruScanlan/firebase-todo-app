@@ -1,5 +1,4 @@
-import {firestore} from '../firebase';
-import { list } from 'postcss';
+import firebase, {firestore} from '../firebase';
 
 export const LISTS_FETCH = 'lists_fetch';
 export const LISTS_HAS_ERROED = 'lists_has_erroed';
@@ -90,7 +89,8 @@ export function listItemsFetch(listId) {
                 items.push({
                     id: doc.id,
                     completed: doc.data().completed,
-                    name: doc.data().name
+                    name: doc.data().name,
+                    created: doc.data().created
                 })
             });
             dispatch(listItemsIsLoading(listId, false));
@@ -98,6 +98,41 @@ export function listItemsFetch(listId) {
         }).catch(error => {
             console.error(error);
             dispatch(listItemsHasErrored(listId, true));
+        })
+    }
+}
+
+export const LIST_ITEMS_SET_COMPLETED = 'list_items_set_completed';
+export const LIST_ITEMS_ADD = 'list_items_add';
+export const LIST_ITEMS_ADD_SUCCESS = 'list_items_add_success';
+
+export function listItemsSetCompleted(listId, itemId, completed) {
+    firestore.collection('lists').doc(listId).collection('items').doc(itemId).update({completed});
+
+    return {
+        type: LIST_ITEMS_SET_COMPLETED,
+        listId,
+        itemId,
+        completed
+    }
+}
+
+export function listItemsAddSuccess(listId, item) {
+    return {
+        type: LIST_ITEMS_ADD_SUCCESS,
+        listId,
+        item
+    }
+}
+
+export function listItemsAdd(listId, name) {
+    return dispatch => {
+        firestore.collection('lists').doc(listId).collection('items').add({
+            name,
+            created: firebase.firestore.Timestamp.now(),
+            completed: false
+        }).then(ref => {
+            dispatch(listItemsAddSuccess(listId, {id: ref.id, name, completed: false}));
         })
     }
 }

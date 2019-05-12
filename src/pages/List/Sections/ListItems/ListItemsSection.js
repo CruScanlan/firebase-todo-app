@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {listItemsFetch} from '../../../../actions';
+import {listItemsFetch, listItemsSetCompleted} from '../../../../actions';
 
 import Loader from '../../../../components/Loader/Loader';
 
@@ -26,7 +26,7 @@ class ListItemsSection extends React.Component {
     }
 
     handleTickEvent(item) {
-        
+        this.props.listItemsSetCompleted(this.props.listId, item.id, !item.completed);
     }
 
     renderListItems(list) {
@@ -55,12 +55,7 @@ class ListItemsSection extends React.Component {
     }
 
     renderTick(item) {
-        if(item.completed) {
-            return (
-                <img className="c-listItemsSection__item-tick" src={tickSvg} onClick={() => this.handleTickEvent(item)} />
-            )
-        }
-        return <img className="c-listItemsSection__item-tick" src={tickedSvg} onClick={() => this.handleTickEvent(item)} />
+        return <img className="c-listItemsSection__item-tick" src={item.completed ? tickedSvg : tickSvg} onClick={() => this.handleTickEvent(item)} />
     }
 
     render() {
@@ -78,4 +73,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {listItemsFetch})(ListItemsSection);
+export default connect(mapStateToProps, {listItemsFetch, listItemsSetCompleted})(ListItemsSection);

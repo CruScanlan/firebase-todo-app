@@ -1,0 +1,76 @@
+@import '../../../../styles/global';
+
+.c-addItemSection {
+    padding: 10px 0px 20px 0px;
+    border-top: 2px solid white;
+    margin: 0px 10px;
+
+    &__text {
+        text-transform: uppercase;
+        text-align: center;
+
+        & > h4 {
+            margin: 0;
+        }
+        padding-bottom: 10px;
+    }
+
+    &__form {
+        display: flex;
+        justify-content: space-between;
+
+        &-text {
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 0.25em;
+            width: 78%;
+            font-size: 1.4em;
+            height: 42px;
+            transition: box-shadow .1s ease-in-out, border-color .1s ease-in-out;
+
+            &:focus {
+                border-color: #fff;
+                box-shadow:0 0 0 .15rem #fff;
+            }
+        }
+
+        &-submit {
+            text-transform: uppercase;
+            width: 20%;
+            border-radius: 0.125rem;
+            background-color: $s-color--secondary;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+            transition: background-color 0.025s ease-in-out;
+
+            &:hover {
+                background-color: $s-color--secondary-dark;
+            }
+
+            &:active {
+                transform: translateY(2px);
+                background-color: $s-color--secondary-dark;
+                box-shadow: 0 1px 2px 0 rgba(0,0,0,.16),0 1px 5px 0 rgba(0,0,0,.12);
+            }
+        }
+
+        @include t-media-query($s-xsmall-up) {
+            &-text {
+                width: 83%;
+            }
+
+            &-submit {
+                width: 15%;
+            }
+        }
+
+        @include t-media-query($s-small-up) {
+            &-text {
+                width: 88%;
+            }
+
+            &-submit {
+                width: 10%;
+            }
+        }
+    }
+}

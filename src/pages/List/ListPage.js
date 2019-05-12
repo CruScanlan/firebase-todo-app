@@ -2,6 +2,8 @@ import React from 'react';
 import {withRouter, Redirect} from 'react-router-dom';
 
 import Page, {PageBoundary} from '../../components/Page/Page';
+
+import AddItemSection from './Sections/AddItem/AddItemSection';
 import ListItemsSection from './Sections/ListItems/ListItemsSection';
 
 import './ListPage.scss';
@@ -20,7 +22,8 @@ export default withRouter(props => {
                     <div className="p-listPage__title">
                         <h2>{props.location.state.listName}</h2>
                     </div>
-                    <ListItemsSection listId={props.match.params.listId}/>
+                    <AddItemSection listId={props.match.params.listId} />
+                    <ListItemsSection listId={props.match.params.listId} />
                 </PageBoundary>
             </div>
         </Page>

@@ -6,6 +6,7 @@
     z-index: $s-z--navbar;
     align-items: stretch;
     color: $s-color--white;
+    position: fixed;
     background-color: $s-color--primary;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.14);
 
