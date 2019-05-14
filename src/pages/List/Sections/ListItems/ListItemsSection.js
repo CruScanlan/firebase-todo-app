@@ -44,6 +44,7 @@ class ListItemsSection extends React.Component {
                 </div>
             )
         }
+        if(!list.items) return <div></div>
         return list.items.map(item => {
             return (
                 <div className="c-listItemsSection__item" key={item.id}>                        

@@ -1,0 +1,27 @@
+@import '../../../../styles/global';
+
+.c-addListSection {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+
+    &__button {
+        height: 42px;
+        width: 80%;
+        text-transform: uppercase;
+        border-radius: 0.125rem;
+        background-color: $s-color--secondary;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+        transition: background-color 0.025s ease-in-out;
+
+        &:hover {
+            background-color: $s-color--secondary-dark;
+        }
+
+        &:active {
+            transform: translateY(2px);
+            background-color: $s-color--secondary-dark;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.16),0 1px 5px 0 rgba(0,0,0,.12);
+        }
+    }
+}

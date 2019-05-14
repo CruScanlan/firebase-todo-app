@@ -3,6 +3,7 @@ import React from 'react';
 import Page, {PageBoundary} from '../../components/Page/Page';
 
 import ListsSection from './Sections/ListsSection/ListsSection';
+import AddListSection from './Sections/AddListSection/AddListSection';
 
 import './ListsPage.scss';
 
@@ -17,6 +18,7 @@ export default props => {
             <div className="p-listsPage__inner">
                 <PageBoundary>
                     <ListsSection />
+                    <AddListSection />
                 </PageBoundary>
             </div>
         </Page>

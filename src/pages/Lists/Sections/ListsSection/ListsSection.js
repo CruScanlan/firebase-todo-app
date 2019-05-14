@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {listsFetch} from '../../../../actions';
 
 import Loader from '../../../../components/Loader/Loader';
@@ -33,6 +33,7 @@ class ListsSection extends React.Component {
             )
         }
         return this.props.lists.map(list => {
+            if(list.new) return <Redirect to={{pathname: `/list/${list.id}`, state:{listName: list.name, listId: list.id, shouldEdit: true}}} />
             return (
                 <Link className="c-listsSection__listItem" key={list.id} to={{pathname: `/list/${list.id}`, state:{listName: list.name, listId: list.id}}}>
                     <div className="c-listsSection__listItem-name">

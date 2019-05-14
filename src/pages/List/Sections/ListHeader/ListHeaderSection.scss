@@ -1,0 +1,62 @@
+@import '../../../../styles/global';
+
+.c-listHeaderSection {
+    &__static {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+        padding-bottom: 20px;
+
+        &-isInactive {
+            display: none;
+        }
+
+        &-title {
+            width: 90%;
+            padding-left: 10%;
+            text-align: center;
+
+            & > h2 {
+                margin: 0;
+            }
+        }
+    
+        &-pen {
+            height: 32px;
+    
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__editable {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+        padding-bottom: 20px;
+
+        &-isActive {
+            display: flex;
+        }
+
+        &-form {
+            width: 90%;
+            padding-left: 10%;
+        }
+
+        &-title {
+            width: 100%;
+            background: 0;
+            background-color: rgba(10, 10, 10, 0.15);
+            border: 0;
+            font-family: $s-font--default;
+            color: $s-color--white;
+            line-height: 1.25;
+            font-size: 2em;
+            text-align: center;
+        }
+    }
+}

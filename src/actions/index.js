@@ -50,6 +50,51 @@ export function listsFetch() {
     }
 }
 
+export const LISTS_SET_NAME = 'lists_set_name';
+export const LISTS_ADD_LIST = 'lists_add_list';
+export const LISTS_ADD_LIST_SUCCESS = 'lists_add_list_success';
+export const LISTS_SET_OLD = 'lists_set_old';
+
+export function listsSetName(listId, name) {
+    firestore.collection('lists').doc(listId).update({name});
+
+    return {
+        type: LISTS_SET_NAME,
+        listId
+    }
+}
+
+export function listsAddListSuccess(list) {
+    return {
+        type: LISTS_ADD_LIST_SUCCESS,
+        list
+    }
+}
+
+export function listsAddList() {
+    return dispatch => {
+        firestore.collection('lists').add({
+            name: ''
+        }).then(ref => {
+            ref.get().then(snapshot => {
+                dispatch(listsAddListSuccess({
+                    id: ref.id,
+                    ...snapshot.data()
+                }));
+            });
+        }).catch(error => {
+            console.error(error);
+        })
+    }
+}
+
+export function listsSetOld(listId) {
+    return {
+        type: LISTS_SET_OLD,
+        listId
+    }
+}
+
 export const LIST_ITEMS_FETCH = 'list_items_fetch';
 export const LIST_ITEMS_HAS_ERROED = 'list_items_has_erroed';
 export const LIST_ITEMS_IS_LOADING = 'list_items_is_loading';
@@ -83,7 +128,7 @@ export function listItemsFetch(listId) {
     return dispatch => {
         dispatch(listItemsIsLoading(listId, true));
 
-        firestore.collection('lists').doc(listId).collection('items').get().then(snapshot => {
+        firestore.collection('lists').doc(listId).collection('items').orderBy('created').get().then(snapshot => {
             let items = [];
             snapshot.forEach(doc => {
                 items.push({

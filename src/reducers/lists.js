@@ -4,6 +4,9 @@ import {
     LISTS_FETCH_SUCCESS,
     LISTS_HAS_ERROED,
     LISTS_IS_LOADING,
+    LISTS_SET_NAME,
+    LISTS_ADD_LIST_SUCCESS,
+    LISTS_SET_OLD,
     LIST_ITEMS_HAS_ERROED,
     LIST_ITEMS_IS_LOADING,
     LIST_ITEMS_FETCH_SUCCESS,
@@ -57,6 +60,25 @@ export function lists(state = [], action) {
                 if(list.id !== action.listId) return list;
                 return Object.assign({}, list, {
                     itemsIsLoading: action.itemsIsLoading
+                });
+            })
+
+        case LISTS_SET_NAME:
+            return state.map(list => {
+                if(list.id !== action.listId) return list;
+                return Object.assign({}, list, {
+                    name: action.name
+                });
+            })
+
+        case LISTS_ADD_LIST_SUCCESS: 
+            return _.concat(state, {...action.list, new: true});
+
+        case LISTS_SET_OLD:
+            return state.map(list => {
+                if(list.id !== action.listId) return list;
+                return Object.assign({}, list, {
+                    new: false
                 });
             })
 
